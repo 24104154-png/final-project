@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Thư viện ảnh tương tác</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body onload="addTabFocus()">
+  <header>
+    <h1>Thư viện ảnh tương tác</h1>
+  </header>
+
+  <main>
+    <!-- Khung xem trước -->
+    <div id="image">Di chuột hoặc nhấn Tab vào một hình ảnh bên dưới để xem tại đây.</div>
+
+    <!-- Sáu hình ảnh, mỗi ảnh có văn bản thay thế (alt) -->
+    <div class="gallery">
+      <img src="images/anh1.jpg" alt="Hoàng hôn cam tím phía sau những dãy núi tối"
+           onmouseover="upDate(this)" onmouseleave="unDo()"
+           onfocus="upDate(this)" onblur="unDo()">
+      <img src="images/anh2.jpg" alt="Hồ nước xanh yên tĩnh dưới chân dãy núi"
+           onmouseover="upDate(this)" onmouseleave="unDo()"
+           onfocus="upDate(this)" onblur="unDo()">
+      <img src="images/anh3.jpg" alt="Những đỉnh núi phủ tuyết lúc bình minh"
+           onmouseover="upDate(this)" onmouseleave="unDo()"
+           onfocus="upDate(this)" onblur="unDo()">
+      <img src="images/anh4.jpg" alt="Khu rừng thông xanh nhiều tầng"
+           onmouseover="upDate(this)" onmouseleave="unDo()"
+           onfocus="upDate(this)" onblur="unDo()">
+      <img src="images/anh5.jpg" alt="Bãi biển cát vàng có vài tảng đá lớn"
+           onmouseover="upDate(this)" onmouseleave="unDo()"
+           onfocus="upDate(this)" onblur="unDo()">
+      <img src="images/anh6.jpg" alt="Đồi cỏ xanh đầy hoa nhiều màu dưới bầu trời có mây"
+           onmouseover="upDate(this)" onmouseleave="unDo()"
+           onfocus="upDate(this)" onblur="unDo()">
+    </div>
+  </main>
+
+  <script>
+    var defaultText = "Di chuột hoặc nhấn Tab vào một hình ảnh bên dưới để xem tại đây.";
+    var defaultColor = "#1d3557";
+
+    // Hiển thị ảnh được chọn trong khung xem trước (mouseover và focus)
+    function upDate(previewPic) {
+      console.log("upDate: " + previewPic.alt);
+      var preview = document.getElementById("image");
+      preview.style.backgroundImage = "url('" + previewPic.src + "')";
+      preview.textContent = previewPic.alt;
+    }
+
+    // Trả khung xem trước về trạng thái ban đầu (mouseleave và blur)
+    function unDo() {
+      console.log("unDo: khôi phục trạng thái mặc định");
+      var preview = document.getElementById("image");
+      preview.style.backgroundImage = "none";
+      preview.style.backgroundColor = defaultColor;
+      preview.textContent = defaultText;
+    }
+
+    // Chạy khi trang tải xong (onload): thêm tabindex cho từng hình ảnh
+    function addTabFocus() {
+      console.log("addTabFocus: sự kiện onload đã kích hoạt");
+      var images = document.querySelectorAll(".gallery img");
+      for (var i = 0; i < images.length; i++) {
+        images[i].setAttribute("tabindex", "0");
+      }
+    }
+  </script>
+</body>
+</html>
